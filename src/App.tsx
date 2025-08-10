@@ -1,5 +1,7 @@
-import './App.css'
+import styles from './App.module.css'
 import { Header } from './components/Header'
+import { Sidebar } from './components/Sidebar'
+import { Post } from './Post'
 
 function App() {
 
@@ -7,8 +9,21 @@ function App() {
     <>
       <Header/>
 
-      <div className="whapper">
+      <div className={styles.wrapper}>
+        <Sidebar/>
         
+        <main>
+          <Post
+            author='Felipe Carvalho'
+            content ='Lorem Ipsum dolor sit amet consectetur adipsicing elit.'
+          />
+
+          <Post
+            author='Gabriela Buzzi'
+            content ='Lorem Ipsum dolor sit amet consectetur adipsicing elit.'
+          />
+          
+        </main>
       </div>
     </>
   )
