@@ -12,6 +12,11 @@
     --green-light:#00B37E;
 }
 
+:focus{
+    outline: transparent;
+    box-shadow: 0 0 0  2px var(--green-500);
+}
+
 *{
     padding: 0;
     margin: 0;

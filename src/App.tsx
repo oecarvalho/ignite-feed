@@ -1,7 +1,7 @@
 import styles from './App.module.css'
 import { Header } from './components/Header'
 import { Sidebar } from './components/Sidebar'
-import { Post } from './Post'
+import { Post } from './components/Post'
 
 function App() {
 
@@ -13,15 +13,7 @@ function App() {
         <Sidebar/>
         
         <main>
-          <Post
-            author='Felipe Carvalho'
-            content ='Lorem Ipsum dolor sit amet consectetur adipsicing elit.'
-          />
-
-          <Post
-            author='Gabriela Buzzi'
-            content ='Lorem Ipsum dolor sit amet consectetur adipsicing elit.'
-          />
+          <Post/>
           
         </main>
       </div>
