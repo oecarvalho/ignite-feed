@@ -113,8 +113,12 @@
     cursor: pointer;
 }
 
-.contentForm button[type=submit]:hover{
+.contentForm button[type=submit]::not(:disabled):hover{
     background: var(--green-light);
     transition: .1s;
 }
 
+.contentForm button[type=submit]:disabled{
+    opacity: 0.7;
+    cursor: not-allowed;
+}

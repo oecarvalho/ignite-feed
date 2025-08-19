@@ -40,14 +40,27 @@ export function Post({author, content, publishedAt}: PostType){
         addSuffix: true,
     })
 
-    function handleCreateNewcontent(){
+    function handleCreateNewcontent(event: React.MouseEvent<HTMLButtonElement>){
         event?.preventDefault()
         setComments([...comments, newCommentText])
         setNewCommentText('')
     }
 
-    function handleNewCommentChange(){
+    function handleNewCommentChange(event: React.MouseEvent<HTMLButtonElement>){
+        event.target.setCustomValidity('')
         setNewCommentText(event?.target.value)
+    }
+
+    function deleteComment(commentToDelete){
+        const commentsWithoutDeletedOne = comments.filter(comment => {
+            return comment !== commentToDelete
+        })
+
+        setComments(commentsWithoutDeletedOne)
+    }
+
+    function handleNewCommentInvalid (event: React.MouseEvent<HTMLButtonElement>){
+        event?.target.setCustomValidity('Esse campo é obrigatório')
     }
 
     return(
@@ -69,9 +82,9 @@ export function Post({author, content, publishedAt}: PostType){
                 {
                     content.map(line => {
                         if(line.type === 'paragraph'){
-                            return <p>{line.content}</p>
+                            return <p key={line.content}>{line.content}</p>
                         } else if(line.type === 'link'){
-                            return <p><a href="#">{line.content}</a></p>
+                            return <p key={line.content }><a href="#">{line.content}</a></p>
                         }
                     })
                 }
@@ -85,16 +98,18 @@ export function Post({author, content, publishedAt}: PostType){
                     placeholder="Deixe um comentário"
                     onChange={handleNewCommentChange}
                     value={newCommentText}
+                    onInvalid={handleNewCommentInvalid}
+                    required
                 />
 
                 <footer>
-                    <button type="submit">Comentar</button>
+                    <button type="submit" disabled={newCommentText.length === 0}>Comentar</button>
                 </footer>
             </form>
 
             <div className={styles.List}>
                 {comments.map(comment =>{
-                    return <Comment content={comment.toString()}/>
+                    return <Comment key={comment} content={comment.toString()} onDeleteComment={deleteComment}/>
                 })}
             </div>
         </article>
